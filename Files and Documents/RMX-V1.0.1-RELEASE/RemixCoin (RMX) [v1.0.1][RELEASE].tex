@@ -1,0 +1,256 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage[includeheadfoot,pass,a4paper]{geometry}
+\usepackage{datetime}
+\usepackage{amssymb}
+\usepackage{alphalph}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{tocstyle}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{import}
+\usepackage{wallpaper}
+\usepackage{tikz}
+\usepackage{parcolumns}
+\usepackage{multirow}
+\usepackage{changepage}
+\usepackage{titlesec}
+\usepackage{tocvsec2}
+\usepackage{enumitem}
+\usepackage{paralist}
+\usepackage{pdftexcmds}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xstring}
+\usepackage{minitoc}
+\usepackage{pagecolor}
+\usepackage{pdfpages}
+\usepackage[toc,nopostdot,nonumberlist,style=altlistgroup]{glossaries}
+\usepackage{hyphenat}
+\usepackage[space]{grffile}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage[normalem]{ulem}
+\usetikzlibrary{calc}
+
+%----------------------------------------------------------------------------------------
+%   VARIABLES
+%----------------------------------------------------------------------------------------
+\newdateformat{mydate}{\monthname[\THEMONTH] \ordinaldate{\THEDAY}, \THEYEAR{ }}
+\newcommand{\documentDate}{\mydate\today}
+
+\newcommand{\documentVersion}{v1.0.1-08.27.2018}
+\newcommand{\documentSubTitle}{RMX v1.0.1 $|$ 08.27.2018}
+\newcommand{\documentTitle}{Remix (RMX) Official Release}
+\newcommand{\documentBackground}{../Boilerplate/Background/document-background-print.png}
+\newcommand{\copyrightClause}{\copyright{} Remix $|$ A3RK $|$ Vox Populi, Vox Monetae}
+
+
+%----------------------------------------------------------------------------------------
+%   MARGINS, TEXT, TITLES
+%----------------------------------------------------------------------------------------
+
+\topmargin -1.5cm        
+\oddsidemargin -0.65cm   
+\evensidemargin 0cm  
+\textwidth 17.2cm
+\textheight 24.25cm 
+\parskip 5pt          
+\parindent 0pt 
+
+\titleformat{\section}[block]{\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}[block]{\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]{\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section} {0em}{3.25ex plus 1ex minus .2ex}{0ex plus .2ex}
+\titlespacing*{\subsection} {0.5em}{2.75ex plus 1ex minus .2ex}{0ex plus .2ex}
+\titlespacing*{\subsubsection} {1em}{2.25ex plus 1ex minus .2ex}{0ex plus .2ex}
+
+%----------------------------------------------------------------------------------------
+%   TEXT COLOR
+%----------------------------------------------------------------------------------------
+
+\definecolor{articleColor}{cmyk}{0 , 0  , 0   , 0.85}
+\color{articleColor}
+
+%----------------------------------------------------------------------------------------
+%   SPACING
+%----------------------------------------------------------------------------------------
+
+\onehalfspacing
+
+%----------------------------------------------------------------------------------------
+%   EXTENDED LISTS
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\labelenumi}{\arabic{enumi}. }
+\renewcommand{\labelenumii}{\arabic{enumii}. }
+\renewcommand{\labelenumiii}{\arabic{enumiii}. }
+
+
+%----------------------------------------------------------------------------------------
+%   HEADER AND FOOTER
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy} 
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.25pt}
+
+\fancyfoot[CE,LO]{
+		{\scriptsize 
+				\documentSubTitle \\[0.35ex]  
+				\textbf{\documentTitle{}} \\[0.35ex] 
+				\copyrightClause{} \\[0.35ex] 
+		}
+}
+
+\fancyfoot[LE,RO]{
+		{\scriptsize 
+				\hfill Page \thepage{} of \pageref{LastPage} \\[0.35ex] 
+				\textbf{ } \\[0.35ex]
+				\hyperref[CHANGELOG]{\documentVersion{}}\\[0.35ex]
+		}
+}
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleGM}{\begingroup 
+\hbox{ 
+\parbox[b]{1\textwidth}{
+\vspace{0.03\textheight} 
+{\noindent\Large\bfseries \documentTitle}\\[1\baselineskip]
+{\large \textit{\documentSubTitle}}\\[4\baselineskip]
+
+}}
+\endgroup}
+
+%----------------------------------------------------------------------------------------
+%   BACKGROUND
+%----------------------------------------------------------------------------------------
+
+\CenterWallPaper{1}{\documentBackground}
+
+%----------------------------------------------------------------------------------------
+%   SUBSUBSUBSECTIONS
+%----------------------------------------------------------------------------------------
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}[block]{\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection} {1.5em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{6}{\z@}%
+	{1.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{7}{\parindent}%
+	{1.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%   SUBSUBSUBSECTIONS
+%----------------------------------------------------------------------------------------
+
+\titleclass{\subsubsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsubsection}[subsubsubsection]
+\renewcommand\thesubsubsubsubsection{\thesubsubsubsection.\arabic{subsubsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsubsection}[block]{\normalfont\normalsize\bfseries}{\thesubsubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsubsection} {3em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{6}{\z@}%
+	{1.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{7}{\parindent}%
+	{1.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsubsection{5}
+\def\toclevel@paragraph{6}
+\def\toclevel@paragraph{7}
+\def\l@subsubsubsubsection{\@dottedtocline{5}{8em}{4em}}
+\def\l@paragraph{\@dottedtocline{6}{12em}{5em}}
+\def\l@subparagraph{\@dottedtocline{7}{16em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{8}
+\setcounter{tocdepth}{60}
+
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+
+%----------------------------------------------------------------------------------------
+%   DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+	\titleGM
+
+
+	\newpage
+	
+	\begin{compactitem}
+		\item \href{remixcoin.io}{Remixcoin.io Website}
+		\item \href{https://discord.gg/dxWkpGX}{Remix Discord}
+		\item \href{https://gitlab.com/a3rk}{Remix Source Code}
+		\item \href{https://pool.remixcoin.io/}{Remix Official Pool}
+		\item \href{https://explorer.remixcoin.io/}{Remix Blockchain Explorer}
+		\item \href{https://www.reddit.com/r/remixcoin}{Remix Reddit}
+	\end{compactitem}
+
+
+	Competition is all around us. It exists in every arena, every industry, every field, leading to innovation, new and exciting breakthroughs, all while advancing technologies, raising them to new heights. Competition is essential in product evolution, improving everything from quality of contribution to market visibility and awareness. Competition promotes industry through ongoing research and inspection. The results of healthy competition are crucial in allowing end users alternative solutions to existing problems and impediments, while pushing existing suppliers to improve existing methodologies and solutions in order to pioneer new and better technologies.
+
+	It is said that imitation is the sincerest form of flattery. With the project’s justification rooted in the need for healthy competition to advance innovation in the existing privacy oriented currencies, this project was born as a clone of Monero v0.11.0.0, where a bit of development by our team initially took place relative to the loose requirements for a small bounty project, but our work refused to stop there.
+
+	That very same group of individuals decided to continue their research and work together, believing that certain variants of Monero (XMR) were failing to provide viable contributions to either the parent project, the fork, or any of the communities and contributors involved. Regardless, we found ourselves in a position where our team genuinely wanted to continue improving upon what had already been built, but also have the ability to investigate and introduce our own innovations while allowing the community to openly, freely, actively contribute to the project as well. 
+
+	With that being said, we would like to introduce Remix (RMX) as a currency and community we believe builds upon Monero (XMR) logically, philosophically, keeping true to core tenants and the general spirit of Monero while identifying, developing, and integrating improvements and optimizations that allows Remix to distinguish itself from Monero without disrupting it, or its community, by making slight modifications to XMR as a currency and simply relabeling and repackaging accordingly. 
+
+
+	There is No promise of the monetary moon and no promise of flawless products. We will have setbacks, and issues will occur. If you seek only economic gain, please look elsewhere. What we can offer you, however, is a group of highly motivated individuals interested in furthering privacy focused currency technologies through process driven results relative to our ongoing conversation with the community and contingent upon actual community consensus. 
+
+	Remix is a community driven project where development milestone selection will have community input. Community voices will be heard, and following feasibility studies and report outs, features will be either developed or deferred.
+
+	We ask for any interested community members to join us as volunteers, developers, investors, evangelists, and critics, seeking to further privacy centric P2P currency technologies during the growth of this project.
+
+	\begin{compactitem}
+		\item \itab{{\bf PoW algorithm}:} \tab{CryptoNight-Heavy}
+		\item \itab{{\bf Max supply}:} \tab{Infinite, see note [1] below}
+		\item \itab{{\bf Block reward}:} \tab{Smoothly varying}
+		\item \itab{{\bf Block time}:} \tab{120 seconds}
+		\item \itab{{\bf Difficulty}:} \tab{Linearly Weighted Mean Average (LWMA)}
+		\item \itab{{\bf 6\% premine:}} \tab{see note [2] below}
+	\end{compactitem}
+
+
+	{\bf [1]} Initial number of atomic units is M = 264 - 1. However, once the block reward reaches the lower bound of 0.3 RMX per block, no further rate change occurs.
+
+	{\bf [2]} 6\% of the total amount of RMX was mined on the first block of RMX, where 5\% was evenly distributed to the 5 core developers, and 1\% was placed into an RMX wallet for the development fund. That wallet address and public view key will be accessible, and remain available, at all times.
+
+\end{document}

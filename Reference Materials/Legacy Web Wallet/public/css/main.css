@@ -1,0 +1,145 @@
+body
+{
+	font-family: Roboto, Helvetica, Arial, sans-serif;
+
+	margin: 0;
+	padding: 0; 
+
+	color: rgba(0,0,0,.87);
+	// background: #eceff1;
+
+	background: url(../img/backgrounds/wallpaper-6.jpg) no-repeat center top fixed;
+	background-size: cover;
+}
+
+#message
+{
+    max-width: 360px;
+    margin: 100px auto 16px;
+    padding: 32px 24px;
+
+    border-radius: 3px; 
+    background: white;
+}
+#message h2
+{
+    font-size: 16px;
+    font-weight: bold;
+
+    margin: 0 0 8px; 
+
+    color: #ffa100;
+}
+#message h1
+{
+    font-size: 22px;
+    font-weight: 300;
+
+    margin: 0 0 16px;
+
+    color: rgba(0,0,0,.6);
+}
+#message p
+{
+    font-size: 14px; 
+    line-height: 140%;
+
+    margin: 16px 0 24px;
+}
+#message a
+{
+    display: block;
+
+    padding: 16px;
+
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    color: white;
+    border-radius: 4px; 
+    background: #039be5;
+}
+#message,
+#message a
+{
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+}
+#load
+{
+    font-size: 13px; 
+
+    text-align: center;
+
+    color: rgba(0,0,0,.4);
+}
+
+#login-register {
+	margin: 150px auto 16px;
+	background: rgba(0,0,0,0.12);
+	overflow: visible;
+}
+
+#login-register .mdl-card__title,
+#login-register .mdl-card__supporting-text > *,
+#login-register .mdl-card__supporting-text > * > *,
+#login-register .mdl-card__actions {
+	color: white;
+}
+#login-register .mdl-card__supporting-text > * > input {
+	border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+#oauth-container {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#sign-in-button {
+	cursor: pointer;
+}
+
+.mdl-layout__header {
+	background-color: rgba(96,125,139, 0.12);
+}
+
+.mdl-card__title img {
+	position: absolute;
+	left: 10px;
+	top: -75px;
+	width: 90%;
+}
+// .mdl-layout-transparent{background: url('../assets/demos/transparent.jpg') center / cover;}
+.mdl-layout-transparent
+{
+    background: none;
+}
+.mdl-layout-transparent .mdl-layout__header,
+.mdl-layout-transparent .mdl-layout__drawer-button
+{
+    color: white;
+}
+
+
+.mdl-mini-footer {
+	padding: 0.5rem 1rem;
+	background: rgba(0,0,0,0.12);
+}
+
+
+
+@media (max-width: 600px)
+{
+    body,
+    #message
+    {
+        margin-top: 0;
+
+        background: white;
+        box-shadow: none;
+    }
+    body
+    {
+        border-top: 16px solid #ffa100;
+    }
+}
