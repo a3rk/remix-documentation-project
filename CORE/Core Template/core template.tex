@@ -1,0 +1,248 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage[includeheadfoot,pass,a4paper]{geometry}
+\usepackage{datetime}
+\usepackage{amssymb}
+\usepackage{alphalph}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{tocstyle}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{import}
+\usepackage{wallpaper}
+\usepackage{tikz}
+\usepackage{parcolumns}
+\usepackage{multirow}
+\usepackage{changepage}
+\usepackage{titlesec}
+\usepackage{tocvsec2}
+\usepackage{enumitem}
+\usepackage{paralist}
+\usepackage{pdftexcmds}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xstring}
+\usepackage{minitoc}
+\usepackage{pagecolor}
+\usepackage{pdfpages}
+\usepackage[toc,nopostdot,nonumberlist,style=altlistgroup]{glossaries}
+\usepackage{hyphenat}
+\usepackage[space]{grffile}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usetikzlibrary{calc}
+
+%----------------------------------------------------------------------------------------
+%   VARIABLES
+%----------------------------------------------------------------------------------------
+\newdateformat{mydate}{\monthname[\THEMONTH] \ordinaldate{\THEDAY}, \THEYEAR{ }}
+
+\newcommand{\documentVersion}{v0.0.0-00.00.0000}
+\newcommand{\documentSubTitle}{SUBTITLE}
+\newcommand{\documentTitle}{TITLE}
+\newcommand{\documentBackground}{../Background/document-background-print.png}
+\newcommand{\copyrightClause}{\copyright{} Remix $|$ A3RK $|$ Vox Populi, Vox Monetae}
+
+
+%----------------------------------------------------------------------------------------
+%   MARGINS, TEXT, TITLES
+%----------------------------------------------------------------------------------------
+
+\topmargin -1.25cm        
+\oddsidemargin -0.65cm   
+\evensidemargin 0cm  
+\textwidth 17.2cm
+\textheight 23.75cm 
+\parskip 5pt          
+\parindent 0pt 
+
+\titleformat{\section}[block]{\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}[block]{\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]{\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsection} {0.5em}{1.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsubsection} {1em}{1.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%----------------------------------------------------------------------------------------
+%   TEXT COLOR
+%----------------------------------------------------------------------------------------
+
+\definecolor{articleColor}{cmyk}{0 , 0  , 0   , 0.85}
+\color{articleColor}
+
+%----------------------------------------------------------------------------------------
+%   SPACING
+%----------------------------------------------------------------------------------------
+
+\onehalfspacing
+
+%----------------------------------------------------------------------------------------
+%   EXTENDED LISTS
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\labelenumi}{\arabic{enumi}. }
+\renewcommand{\labelenumii}{\arabic{enumii}. }
+\renewcommand{\labelenumiii}{\arabic{enumiii}. }
+
+
+%----------------------------------------------------------------------------------------
+%   HEADER AND FOOTER
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy} 
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.25pt}
+
+\fancyfoot[CE,LO]{
+		{\scriptsize 
+				\documentSubTitle \\[0.35ex]  
+				\textbf{\documentTitle{}} \\[0.35ex] 
+				\copyrightClause{} \\[0.35ex] 
+		}
+}
+
+\fancyfoot[LE,RO]{
+		{\scriptsize 
+				\hfill Page \thepage{} of \pageref{LastPage} \\[0.35ex] 
+				\textbf{ } \\[0.35ex]
+				\hyperref[sec:changelog]{\documentVersion{}}\\[0.35ex]
+		}
+}
+
+%----------------------------------------------------------------------------------------
+%   TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleGM}{\begingroup 
+\hbox{ 
+\parbox[b]{1\textwidth}{
+\vspace{0.03\textheight} 
+{\noindent\Large\bfseries \documentTitle}\\[1\baselineskip]
+{\large \textit{\documentSubTitle}}\\[4\baselineskip]
+
+}}
+\endgroup}
+
+%----------------------------------------------------------------------------------------
+%   BACKGROUND
+%----------------------------------------------------------------------------------------
+
+\CenterWallPaper{1}{\documentBackground}
+
+%----------------------------------------------------------------------------------------
+%   SUBSUBSUBSECTIONS
+%----------------------------------------------------------------------------------------
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}[block]{\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection} {1.5em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{6}{\z@}%
+	{1.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{7}{\parindent}%
+	{1.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%   SUBSUBSUBSECTIONS
+%----------------------------------------------------------------------------------------
+
+\titleclass{\subsubsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsubsection}[subsubsubsection]
+\renewcommand\thesubsubsubsubsection{\thesubsubsubsection.\arabic{subsubsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsubsection}[block]{\normalfont\normalsize\bfseries}{\thesubsubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsubsection} {3em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{6}{\z@}%
+	{1.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{7}{\parindent}%
+	{1.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsubsection{5}
+\def\toclevel@paragraph{6}
+\def\toclevel@paragraph{7}
+\def\l@subsubsubsubsection{\@dottedtocline{5}{8em}{4em}}
+\def\l@paragraph{\@dottedtocline{6}{12em}{5em}}
+\def\l@subparagraph{\@dottedtocline{7}{16em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{8}
+\setcounter{tocdepth}{60}
+
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+
+%----------------------------------------------------------------------------------------
+%   DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+	\titleGM
+
+	\newpage
+	\tableofcontents
+
+	\newpage
+	\section{CHANGELOG\label{sec:changelog}}
+	\begin{adjustwidth}{0em}{0pt}
+
+		\begin{compactenum}
+
+			\item {\bf v0.0.0-00.00.0000}: [release information]
+
+		\end{compactenum}
+
+	\end{adjustwidth}
+
+
+	\newpage
+	\section{SECTION\label{sec:section}}
+	\begin{adjustwidth}{0em}{0pt}
+		[CONTENT]
+	\end{adjustwidth}
+
+		\subsection{SUB-SECTION\label{subsec:sub_section}}
+		\begin{adjustwidth}{1em}{0pt}
+			[CONTENT]
+		\end{adjustwidth}
+
+			\subsubsection{SUB-SUB-SECTION\label{subsubsec:sub_sub_section}}
+			\begin{adjustwidth}{2em}{0pt}
+				[CONTENT]
+			\end{adjustwidth}
+
+				\subsubsubsection{SUB-SUB-SUB-SECTION\label{subsubsubsec:sub_sub_sub_section}}
+				\begin{adjustwidth}{3em}{0pt}
+					[CONTENT]
+				\end{adjustwidth}
+
+
+\end{document}
